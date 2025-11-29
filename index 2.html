@@ -1,0 +1,30 @@
+
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8"><title>Case Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body><div id="root"></div>
+<script type="text/babel" data-presets="env,react">
+const {useState,useEffect}=React;
+
+function saveData(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function loadData(k,f){const i=localStorage.getItem(k);return i?JSON.parse(i):f;}
+
+function App(){
+  const [caseStudies,setCaseStudies]=useState(loadData("caseStudies",[{id:1,title:"Test Case"}]));
+  const [students,setStudents]=useState(loadData("students",[{id:1,name:"Student",group:"A",completedCases:[]}]));
+  const [weeklyPlan,setWeeklyPlan]=useState(loadData("weeklyPlan",{}));
+
+  useEffect(()=>saveData("caseStudies",caseStudies),[caseStudies]);
+  useEffect(()=>saveData("students",students),[students]);
+  useEffect(()=>saveData("weeklyPlan",weeklyPlan),[weeklyPlan]);
+
+  return <div className="p-6">LocalStorage Ready ✔️</div>;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body></html>
