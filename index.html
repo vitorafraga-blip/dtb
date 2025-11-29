@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Case Study Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tailwind for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React + ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel so we can write JSX directly -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="env,react">
+    const { useState } = React;
+
+    function CaseStudyTracker() {
+      const [caseStudies, setCaseStudies] = useState([
+        { id: 1, title: 'Coca-Cola | Phasing Out Products' },
+        { id: 2, title: 'Slaughter and May | Dog-Friendly Offices' },
+        { id: 3, title: 'Hard Rock | Brazilian Gambling Market' },
+        { id: 4, title: 'LinkedIn | Gamification in the Workplace' },
+        { id: 5, title: 'Nike | Innovation Challenges' },
+        { id: 6, title: 'HSBC | Management and Leadership' },
+        { id: 7, title: 'Dolce & Gabbana | Luxury for Pets' },
+        { id: 8, title: 'Starbucks | Declining Sales' },
+        { id: 9, title: 'Duolingo | AI Replacing Workers' },
+        { id: 10, title: 'Apple | Unfair Competition' },
+        { id: 11, title: 'Corona | No-Alcohol Market' },
+        { id: 12, title: 'Airbnb | New Marketing Campaign' },
+        { id: 13, title: 'Equinox | Longevity Program' },
+        { id: 14, title: 'Walmart | Job Requirements' },
+        { id: 15, title: 'Wells Fargo | Faking Work' },
+        { id: 16, title: 'AliExpress | Brand Sponsorship' },
+        { id: 17, title: 'Red Lobster | A Risky Strategy' },
+        { id: 18, title: 'Lego | A Shift in Strategy' },
+        { id: 19, title: 'Nestlé | Shareholder Pressure' },
+        { id: 20, title: 'Samsung | Working on Weekends' },
+        { id: 21, title: 'Meta | Technology and Education' },
+        { id: 22, title: 'O Boticário | International Expansion' },
+        { id: 23, title: 'Krispy Kreme | New Partnership' },
+        { id: 24, title: 'Corendon | Child-Free Zones' },
+        { id: 25, title: 'Framery | Stress at Work' },
+        { id: 26, title: 'Liquid Death | Going Public' },
+        { id: 27, title: 'Delta | Premium Lounges' },
+        { id: 28, title: "Lyle's Golden Syrup | Logo Redesign" },
+        { id: 29, title: 'Costco | Return Policy' },
+        { id: 30, title: 'Sephora | Unhappy Employees' },
+        { id: 31, title: 'Kraft Heinz | Plant-Based Foods' },
+        { id: 32, title: 'Tesco | Employee Wellbeing' },
+        { id: 33, title: 'Burger King | Mandatory Good Vibes' },
+        { id: 34, title: "Hershey's | False Advertising" },
+        { id: 35, title: 'Comcast | New Theme Park' },
+        { id: 36, title: "McDonald's | Revamping Classic Burgers" },
+        { id: 37, title: 'Nvidia | Stolen Trade Secrets' },
+        { id: 38, title: 'Google | Mass Layoffs' },
+        { id: 39, title: "Domino's | Improving Delivery" },
+        { id: 40, title: 'Frito-Lay | Fewer Doritos in a Bag' },
+        { id: 41, title: 'Uber | Self-Driving Cars' },
+        { id: 42, title: 'Zara | Charging for Online Returns' },
+        { id: 43, title: 'Amazon | Return to Office' },
+        { id: 44, title: 'Netflix | Raising Prices' },
+        { id: 45, title: 'Matter | Smartphone Addiction' },
+        { id: 46, title: 'Bolt | Unlimited PTO' },
+        { id: 47, title: 'Under Armour | Micromanagement' },
+        { id: 48, title: 'Teleperformance | Accents in the Workplace' },
+        { id: 49, title: 'Shein | Greenwashing' },
+        { id: 50, title: 'Mattel | AI-Powered Toys' },
+        { id: 51, title: 'Microsoft | Late-Night Work' },
+        { id: 52, title: 'Starbucks | New Dress Code' },
+        { id: 53, title: 'Pizza Hut | The Gourmet Trend' },
+        { id: 54, title: 'Chipotle | AI in Recruitment' },
+        { id: 55, title: 'Uber | Bucket-List Experiences' },
+        { id: 56, title: 'Trust Ring | Hangover Leave' },
+        { id: 57, title: 'Ulta | Marketing to Children' },
+        { id: 58, title: 'Razorpay | Employee Feedback' },
+        { id: 59, title: 'Disney | Launching an Airline' },
+        { id: 60, title: 'IKEA | Housing Market' },
+        { id: 61, title: 'Shopify | Pointless Meetings' },
+        { id: 62, title: 'TikTok | Physical Book Sales' },
+        { id: 63, title: 'Volkswagen | Restructuring Plan' },
+        { id: 64, title: 'EY | Training Courses' },
+        { id: 65, title: 'Stanley | Viral Marketing' },
+        { id: 66, title: 'JP Morgan | Overwork Culture' },
+      ]);
+
+      const groups = [
+        'Monday 7:30am',
+        'Monday 7:30pm',
+        'Tuesday 8am',
+        'Wednesday 8am',
+        'Wednesday 8pm',
+        'Thursday 7:30pm',
+        'Friday 10am'
+      ];
+
+      const [students, setStudents] = useState([
+        { 
+          id: 1, 
+          name: 'Júlia',
+          group: 'Monday 7:30pm',
+          completedCases: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 34, 35, 36, 38, 39, 43, 44, 47, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66] 
+        },
+        { 
+          id: 2, 
+          name: 'Philippe',
+          group: 'Friday 10am',
+          completedCases: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 38, 43, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66] 
+        }
+      ]);
+
+      const [newCase, setNewCase] = useState('');
+      const [newStudent, setNewStudent] = useState({ name: '', group: groups[0] });
+      const [activeTab, setActiveTab] = useState('weekly');
+      const [selectedGroup, setSelectedGroup] = useState(groups[0]);
+      const [weeklyPlan, setWeeklyPlan] = useState({});
+
+      const addCaseStudy = () => {
+        if (newCase.trim()) {
+          setCaseStudies([...caseStudies, {
+            id: Date.now(),
+            title: newCase
+          }]);
+          setNewCase('');
+        }
+      };
+
+      const addStudent = () => {
+        if (newStudent.name.trim()) {
+          setStudents([...students, {
+            id: Date.now(),
+            name: newStudent.name,
+            group: newStudent.group,
+            completedCases: []
+          }]);
+          setNewStudent({ name: '', group: groups[0] });
+        }
+      };
+
+      const removeCaseStudy = (id) => {
+        setCaseStudies(caseStudies.filter(c => c.id !== id));
+        setStudents(students.map(s => ({
+          ...s,
+          completedCases: s.completedCases.filter(caseId => caseId !== id)
+        })));
+      };
+
+      const removeStudent = (id) => {
+        setStudents(students.filter(s => s.id !== id));
+      };
+
+      const getGroupStudents = (groupName) => {
+        const plan = weeklyPlan[groupName] || {};
+        const baseStudents = students.filter(s => s.group === groupName);
+        const removedIds = plan.removedStudentIds || [];
+        const addedIds = plan.addedStudentIds || [];
+
+        const finalStudents = baseStudents.filter(s => !removedIds.includes(s.id));
+        const addedStudents = students.filter(s => addedIds.includes(s.id));
+
+        return [...finalStudents, ...addedStudents];
+      };
+
+      const removeStudentFromWeek = (groupName, studentId) => {
+        setWeeklyPlan(prev => ({
+          ...prev,
+          [groupName]: {
+            ...prev[groupName],
+            removedStudentIds: [...(prev[groupName]?.removedStudentIds || []), studentId],
+            addedStudentIds: (prev[groupName]?.addedStudentIds || []).filter(id => id !== studentId)
+          }
+        }));
+      };
+
+      const addStudentToWeek = (groupName, studentId) => {
+        setWeeklyPlan(prev => ({
+          ...prev,
+          [groupName]: {
+            ...prev[groupName],
+            addedStudentIds: [...(prev[groupName]?.addedStudentIds || []), studentId],
+            removedStudentIds: (prev[groupName]?.removedStudentIds || []).filter(id => id !== studentId)
+          }
+        }));
+      };
+
+      const selectCaseForGroup = (groupName, caseId) => {
+        setWeeklyPlan(prev => ({
+          ...prev,
+          [groupName]: {
+            ...prev[groupName],
+            selectedCase: caseId,
+            statuses: {}
+          }
+        }));
+      };
+
+      const markStudentStatus = (groupName, studentId, status) => {
+        setWeeklyPlan(prev => ({
+          ...prev,
+          [groupName]: {
+            ...prev[groupName],
+            statuses: {
+              ...(prev[groupName]?.statuses || {}),
+              [studentId]: status
+            }
+          }
+        }));
+      };
+
+      const finishWeek = () => {
+        const updatedStudents = students.map(student => {
+          let newCompletedCases = [...student.completedCases];
+
+          Object.entries(weeklyPlan).forEach(([groupName, plan]) => {
+            const groupStudents = getGroupStudents(groupName);
+            const isInGroup = groupStudents.find(s => s.id === student.id);
+
+            if (isInGroup && plan.selectedCase && plan.statuses?.[student.id] === 'done') {
+              if (!newCompletedCases.includes(plan.selectedCase)) {
+                newCompletedCases.push(plan.selectedCase);
+              }
+            }
+          });
+
+          return { ...student, completedCases: newCompletedCases };
+        });
+
+        setStudents(updatedStudents);
+        setWeeklyPlan({});
+        alert('Week completed! All "done" cases have been added to student records.');
+      };
+
+      const getAvailableCases = (groupName) => {
+        const groupStudents = getGroupStudents(groupName);
+
+        if (groupStudents.length === 0) return [];
+
+        return caseStudies.filter(caseStudy => {
+          return groupStudents.every(student => 
+            !student.completedCases.includes(caseStudy.id)
+          );
+        });
+      };
+
+      const getAvailableStudentsToAdd = (groupName) => {
+        const groupStudents = getGroupStudents(groupName);
+        const groupStudentIds = groupStudents.map(s => s.id);
+        return students.filter(s => !groupStudentIds.includes(s.id));
+      };
+
+      const studentsByGroup = groups.reduce((acc, group) => {
+        acc[group] = students.filter(s => s.group === group);
+        return acc;
+      }, {});
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 md:p-8">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  Case Study Tracker
+                </h1>
+                <p className="text-blue-100">Manage case studies and track student progress by group</p>
+              </div>
+
+              <div className="flex border-b bg-gray-50">
+                <button
+                  onClick={() => setActiveTab('weekly')}
+                  className={
+                    "flex-1 py-4 px-6 font-semibold transition-all " +
+                    (activeTab === 'weekly'
+                      ? 'bg-white text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-600 hover:bg-gray-100')
+                  }
+                >
+                  <span className="inline mr-2">▶</span>
+                  Weekly Planning
+                </button>
+                <button
+                  onClick={() => setActiveTab('cases')}
+                  className={
+                    "flex-1 py-4 px-6 font-semibold transition-all " +
+                    (activeTab === 'cases'
+                      ? 'bg-white text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-600 hover:bg-gray-100')
+                  }
+                >
+                  <span className="inline mr-2">📚</span>
+                  Case Studies
+                </button>
+                <button
+                  onClick={() => setActiveTab('students')}
+                  className={
+                    "flex-1 py-4 px-6 font-semibold transition-all " +
+                    (activeTab === 'students'
+                      ? 'bg-white text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-600 hover:bg-gray-100')
+                  }
+                >
+                  <span className="inline mr-2">👥</span>
+                  Students
+                </button>
+              </div>
+
+              <div className="p-6 md:p-8">
+                {activeTab === 'weekly' && (
+                  <div>
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-2xl font-bold text-gray-800">This Week's Plan</h2>
+                      <button
+                        onClick={finishWeek}
+                        className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                      >
+                        Finish Week & Update Records
+                      </button>
+                    </div>
+
+                    <div className="space-y-6">
+                      {groups.map(groupName => {
+                        const groupStudents = getGroupStudents(groupName);
+                        const availableCases = getAvailableCases(groupName);
+                        const selectedCase = weeklyPlan[groupName]?.selectedCase;
+                        const statuses = weeklyPlan[groupName]?.statuses || {};
+                        const availableToAdd = getAvailableStudentsToAdd(groupName);
+
+                        return (
+                          <div key={groupName} className="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-xl border-2 border-purple-200">
+                            <h3 className="text-xl font-bold text-gray-800 mb-4">{groupName}</h3>
+
+                            <div className="mb-4">
+                              <div className="flex justify-between items-center mb-2">
+                                <p className="font-semibold text-gray-700">Students ({groupStudents.length}):</p>
+                                {availableToAdd.length > 0 && (
+                                  <select
+                                    onChange={(e) => {
+                                      if (e.target.value) {
+                                        addStudentToWeek(groupName, parseInt(e.target.value));
+                                        e.target.value = '';
+                                      }
+                                    }}
+                                    className="text-sm px-3 py-1 border border-gray-300 rounded-lg"
+                                  >
+                                    <option value="">+ Add student</option>
+                                    {availableToAdd.map(s => (
+                                      <option key={s.id} value={s.id}>{s.name} ({s.group})</option>
+                                    ))}
+                                  </select>
+                                )}
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {groupStudents.map(student => (
+                                  <div key={student.id} className="bg-white px-3 py-2 rounded-lg border border-gray-300 flex items-center gap-2">
+                                    <span className="font-medium">{student.name}</span>
+                                    <button
+                                      onClick={() => removeStudentFromWeek(groupName, student.id)}
+                                      className="text-red-500 hover:text-red-700"
+                                    >
+                                      ✕
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div className="mb-4">
+                              <p className="font-semibold text-gray-700 mb-2">
+                                Available Cases ({availableCases.length}):
+                              </p>
+                              {availableCases.length > 0 ? (
+                                <select
+                                  value={selectedCase || ''}
+                                  onChange={(e) => selectCaseForGroup(groupName, e.target.value ? parseInt(e.target.value) : null)}
+                                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                >
+                                  <option value="">Select a case study...</option>
+                                  {availableCases.map(cs => (
+                                    <option key={cs.id} value={cs.id}>{cs.title}</option>
+                                  ))}
+                                </select>
+                              ) : (
+                                <p className="text-gray-500 italic">No available cases for this group</p>
+                              )}
+                            </div>
+
+                            {selectedCase && (
+                              <div className="bg-white p-4 rounded-lg border-2 border-blue-300">
+                                <p className="font-bold text-gray-800 mb-3">
+                                  Selected: {caseStudies.find(c => c.id === selectedCase)?.title}
+                                </p>
+                                <div className="space-y-2">
+                                  {groupStudents.map(student => (
+                                    <div key={student.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                      <span className="font-medium">{student.name}</span>
+                                      <div className="flex gap-2">
+                                        <button
+                                          onClick={() => markStudentStatus(groupName, student.id, 'done')}
+                                          className={
+                                            "px-4 py-1 rounded-lg font-semibold transition-all " +
+                                            (statuses[student.id] === 'done'
+                                              ? 'bg-green-600 text-white'
+                                              : 'bg-gray-200 text-gray-600 hover:bg-green-100')
+                                          }
+                                        >
+                                          ✔ Done
+                                        </button>
+                                        <button
+                                          onClick={() => markStudentStatus(groupName, student.id, 'missed')}
+                                          className={
+                                            "px-4 py-1 rounded-lg font-semibold transition-all " +
+                                            (statuses[student.id] === 'missed'
+                                              ? 'bg-red-600 text-white'
+                                              : 'bg-gray-200 text-gray-600 hover:bg-red-100')
+                                          }
+                                        >
+                                          ✖ Missed
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'cases' && (
+                  <div>
+                    <div className="mb-6">
+                      <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Case Study</h2>
+                      <div className="flex gap-3">
+                        <input
+                          type="text"
+                          placeholder="Case study title"
+                          value={newCase}
+                          onChange={(e) => setNewCase(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && addCaseStudy()}
+                          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                        <button
+                          onClick={addCaseStudy}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                        >
+                          ➕ Add
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                        All Case Studies ({caseStudies.length})
+                      </h2>
+                      <div className="grid gap-3">
+                        {caseStudies.map(caseStudy => (
+                          <div
+                            key={caseStudy.id}
+                            className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200 flex justify-between items-center hover:shadow-md transition-shadow"
+                          >
+                            <h3 className="font-semibold text-gray-800">{caseStudy.title}</h3>
+                            <button
+                              onClick={() => removeCaseStudy(caseStudy.id)}
+                              className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                            >
+                              🗑
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'students' && (
+                  <div>
+                    <div className="mb-6">
+                      <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Student</h2>
+                      <div className="flex flex-col md:flex-row gap-3">
+                        <input
+                          type="text"
+                          placeholder="Student name"
+                          value={newStudent.name}
+                          onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
+                          onKeyPress={(e) => e.key === 'Enter' && addStudent()}
+                          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                        <select
+                          value={newStudent.group}
+                          onChange={(e) => setNewStudent({ ...newStudent, group: e.target.value })}
+                          className="md:w-56 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          {groups.map(group => (
+                            <option key={group} value={group}>{group}</option>
+                          ))}
+                        </select>
+                        <button
+                          onClick={addStudent}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center gap-2"
+                        >
+                          ➕ Add
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                        All Students ({students.length})
+                      </h2>
+                      <div className="space-y-4">
+                        {groups.map(group => {
+                          const groupStudents = studentsByGroup[group] || [];
+                          if (groupStudents.length === 0) return null;
+
+                          return (
+                            <div key={group} className="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                              <h3 className="text-lg font-bold text-gray-800 mb-3">{group}</h3>
+                              <div className="space-y-2">
+                                {groupStudents.map(student => (
+                                  <div key={student.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
+                                    <div>
+                                      <span className="font-semibold text-gray-800">{student.name}</span>
+                                      <span className="text-sm text-gray-600 ml-3">
+                                        {student.completedCases.length} / {caseStudies.length} cases completed
+                                      </span>
+                                    </div>
+                                    <button
+                                      onClick={() => removeStudent(student.id)}
+                                      className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                                    >
+                                      🗑
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<CaseStudyTracker />);
+  </script>
+</body>
+</html>
